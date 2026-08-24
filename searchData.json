@@ -1,0 +1,111 @@
+[
+  {
+    "component": "@hyperdart/tourismexplorer",
+    "componentID": 0,
+    "componentPrimaryName": "Tourism Explorer",
+    "templateID": 0,
+    "entities": [
+      {
+        "word": "NYC",
+        "wgID": 1000,
+        "wgName": "CITIES",
+        "collectionName": "CITIES",
+        "collectionType": "HD_LOCATION",
+        "wgUGC": 0,
+        "templateID": 0,
+        "entityInfo": {
+          "geo": {
+            "tz": "America/New_York",
+            "lat": 40.71427,
+            "city": "New York City",
+            "long": -74.00597,
+            "state": "New York",
+            "country": "United States",
+            "district": null,
+            "stateAbb": "NY",
+            "stateCode": "US.NY",
+            "countryQID": "Q30",
+            "countryCode": "US",
+            "districtCode": ""
+          },
+          "manual": 1,
+          "labelSource": "wiki"
+        },
+        "compInfo": null,
+        "entityType": "LOCATION",
+        "sourceID": "5128581",
+        "IDs": {
+          "wikiQID": "Q60",
+          "TPcityID": 20857,
+          "geonameID": 5128581
+        },
+        "componentName": "@hyperdart/tourismexplorer",
+        "componentID": 0,
+        "info": {
+          "Type": "cities"
+        },
+        "description": "largest city in the United States",
+        "qualifierReqd": 0,
+        "priority": 3,
+        "isEnabled": 1,
+        "keywordRequired": 0,
+        "primaryText": "",
+        "relevanceScore": 100,
+        "sourceValue": 9454995,
+        "index": 23,
+        "wgInfo": {
+          "Type": "cities"
+        },
+        "primaryID": "5128581"
+      }
+    ],
+    "query": "Tourist attractions in NYC",
+    "componentEnabled": true,
+    "keyword": [
+      {
+        "word": "tourist attractions",
+        "description": ""
+      }
+    ],
+    "compInfo": null,
+    "queryTerm": "tourist attractions in nyc",
+    "disambiguationType": 3,
+    "userLocation": {
+      "position": {
+        "coords": {
+          "latitude": 26.4631,
+          "longitude": 80.3479
+        },
+        "city": "Kanpur",
+        "country": "India",
+        "countryCode": "IN",
+        "place": "Uttar Pradesh",
+        "timezone": [
+          "Asia/Kolkata"
+        ]
+      },
+      "source": "ip",
+      "time": 1787225927054
+    },
+    "ugc": false,
+    "time": "2026-08-24T12:00:00.000Z",
+    "qualifierReqd": false,
+    "genericQuery": "tourist attractions in HD_LOCATION__CITIES",
+    "unambiguous": true,
+    "unresolvedQuery": "",
+    "queryRegex": "tourist\\s+attractions?\\s+(in|near)\\s+HD_LOCATION__([^\\s]+)(__\\w+)?.*",
+    "explain": {
+      "tC": 26,
+      "uC": 0,
+      "tW": 4,
+      "uW": 0,
+      "pR": 100
+    },
+    "wgUGC": false,
+    "quickView": 3,
+    "suggestedPlace": "sidebar",
+    "_processedQuery": "tourist attractions in nyc",
+    "_disambiguationType": 3,
+    "componentType": "internal"
+  }
+]
