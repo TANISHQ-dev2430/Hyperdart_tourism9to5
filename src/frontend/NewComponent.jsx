@@ -198,9 +198,9 @@ function NewComponent(props) {
   }
 
   return (
-    <div className="w-full h-[100dvh] min-h-[600px] overflow-hidden bg-gradient-to-b from-orange-50/40 via-white to-slate-50 text-slate-800 font-sans selection:bg-orange-500 selection:text-white flex flex-col max-w-7xl mx-auto relative">
+    <div className="w-full bg-gradient-to-b from-orange-50/40 via-white to-slate-50 text-slate-800 font-sans selection:bg-orange-500 selection:text-white flex flex-col max-w-7xl mx-auto">
       {/* Header Section */}
-      <div className="flex-none p-4 sm:p-6 pb-2">
+      <div className="p-4 sm:p-6 pb-2">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-orange-200/70 shadow-lg shadow-orange-500/5 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-400/15 rounded-full blur-3xl pointer-events-none"></div>
         
@@ -326,7 +326,7 @@ function NewComponent(props) {
       </div>
 
       {/* Main Responsive Body */}
-      <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-6 space-y-6 hide-scrollbar">
+      <div className="px-4 sm:px-6 pb-6 space-y-6">
         {/* API Key Box */}
         {!apiKey && (
           <form onSubmit={handleSaveKey} className="bg-white rounded-2xl p-6 border border-orange-200 shadow-md shadow-orange-500/5 flex flex-col sm:flex-row items-center gap-4">
@@ -508,7 +508,7 @@ function NewComponent(props) {
                 </div>
 
                 {/* Sticky Minimap Column */}
-                <div className="lg:col-span-5 sticky top-28 h-[580px]">
+                <div className="lg:col-span-5 sticky top-6">
                   <MapView 
                     places={places}
                     cityCenter={[Number(lat), Number(lon)]}
@@ -521,7 +521,7 @@ function NewComponent(props) {
 
             {/* Map Only Mode */}
             {viewMode === 'map' && (
-              <div className="h-[620px] w-full">
+              <div className="w-full">
                 <MapView 
                   places={places.filter(p => {
                     if (activeCategory === 'All') return true;

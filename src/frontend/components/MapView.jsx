@@ -41,7 +41,7 @@ export default function MapView({ places = [], cityCenter = [27.1767, 78.0081], 
   const validCenter = cityCenter && cityCenter[0] && cityCenter[1] ? cityCenter : [27.1767, 78.0081];
 
   return (
-    <div className="w-full h-full min-h-[380px] lg:min-h-[580px] rounded-3xl overflow-hidden bg-white border border-orange-200/80 shadow-lg shadow-orange-500/5 relative">
+    <div className="w-full h-[400px] sm:h-[500px] rounded-3xl overflow-hidden bg-white border border-orange-200/80 shadow-lg shadow-orange-500/5 relative">
       <MapContainer
         center={validCenter}
         zoom={13}
