@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MapPin, Info, Key, Compass, Map, Columns, Languages, Heart } from 'lucide-react';
+import { MapPin, Info, Key, Compass, Map, Columns, Languages, Heart, Navigation, Route } from 'lucide-react';
 import MapView from './components/MapView';
 import './index.css'; // CRITICAL: Import Tailwind CSS!
 
@@ -121,6 +121,20 @@ function NewComponent(props) {
     if ([80, 81, 82].includes(code)) return { label: 'Showers', icon: '🌧️' };
     if ([95, 96, 99].includes(code)) return { label: 'Thunderstorm', icon: '⛈️' };
     return { label: 'Clear', icon: '☀️' };
+  };
+
+  const getDistanceKm = (lat1, lon1, lat2, lon2) => {
+    if (!lat1 || !lon1 || !lat2 || !lon2) return null;
+    const R = 6371; // Earth radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c;
+    return d < 1 ? `${Math.round(d * 1000)} m` : `${d.toFixed(1)} km`;
   };
 
   const fetchPlaces = async (targetLat, targetLon, key, targetRadius) => {
@@ -430,6 +444,8 @@ function NewComponent(props) {
                     const { name, categories, formatted, description, lon: pLon, lat: pLat } = place.properties;
                     const displayName = translations[name] || name || "Unnamed Sight";
                     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${pLat},${pLon}`;
+                    const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lon}&destination=${pLat},${pLon}`;
+                    const distanceStr = getDistanceKm(lat, lon, pLat, pLon);
                     const isSelected = selectedPlace?.properties?.name === name;
                     
                     const catList = Array.isArray(categories) 
@@ -462,6 +478,12 @@ function NewComponent(props) {
                                 {cat.split('.').pop()}
                               </span>
                             ))}
+                            {distanceStr && (
+                              <span className="text-[11px] font-medium px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full border border-slate-200/80 flex items-center gap-1">
+                                <Navigation className="w-2.5 h-2.5 text-orange-500" />
+                                {distanceStr} from center
+                              </span>
+                            )}
                           </div>
                           
                           {Boolean(description?.trim()) && (
@@ -490,15 +512,28 @@ function NewComponent(props) {
                                 </span>
                               </button>
                               
-                              <a
-                                href={mapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="text-[11px] text-orange-600 hover:text-orange-700 hover:underline font-bold"
-                              >
-                                Maps →
-                              </a>
+                              <div className="flex items-center gap-2.5">
+                                <a
+                                  href={routeUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-orange-600 font-medium"
+                                  title="Get driving/transit/walking route from center"
+                                >
+                                  <Route className="w-3 h-3 text-orange-500" />
+                                  <span>Route</span>
+                                </a>
+                                <a
+                                  href={mapUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="text-[11px] text-orange-600 hover:text-orange-700 hover:underline font-bold"
+                                >
+                                  Maps →
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -570,6 +605,8 @@ function NewComponent(props) {
                   const { name, categories, formatted, lon: pLon, lat: pLat } = place.properties;
                   const displayName = translations[name] || name || "Unnamed Sight";
                   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${pLat},${pLon}`;
+                  const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat || pLat},${lon || pLon}&destination=${pLat},${pLon}`;
+                  const distanceStr = getDistanceKm(lat, lon, pLat, pLon);
                   
                   const catList = Array.isArray(categories) 
                     ? categories 
@@ -587,6 +624,12 @@ function NewComponent(props) {
                               {cat.split('.').pop()}
                             </span>
                           ))}
+                          {distanceStr && (
+                            <span className="text-[11px] font-medium px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full border border-slate-200/80 flex items-center gap-1">
+                              <Navigation className="w-2.5 h-2.5 text-orange-500" />
+                              {distanceStr} from center
+                            </span>
+                          )}
                         </div>
                       </div>
                       
@@ -604,14 +647,25 @@ function NewComponent(props) {
                               <Heart className="w-3.5 h-3.5 fill-red-500" />
                               <span className="text-[11px]">Remove</span>
                             </button>
-                            <a
-                              href={mapUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[11px] text-orange-600 hover:text-orange-700 hover:underline font-bold"
-                            >
-                              Maps →
-                            </a>
+                            <div className="flex items-center gap-2.5">
+                              <a
+                                href={routeUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-orange-600 font-medium"
+                              >
+                                <Route className="w-3 h-3 text-orange-500" />
+                                <span>Route</span>
+                              </a>
+                              <a
+                                href={mapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[11px] text-orange-600 hover:text-orange-700 hover:underline font-bold"
+                              >
+                                Maps →
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
