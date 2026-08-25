@@ -51,7 +51,7 @@ export const parseHyperDartQuery = (rawQuery) => {
   }
 
   return {
-    component: "@hyperdart/tourismexplorer",
+    component: "@tanishq1741/tourism",
     componentID: 0,
     componentPrimaryName: "Tourism Explorer",
     templateID: 0,
@@ -90,7 +90,7 @@ export const parseHyperDartQuery = (rawQuery) => {
           TPcityID: 20857,
           geonameID: 5128581
         },
-        componentName: "@hyperdart/tourismexplorer",
+        componentName: "@tanishq1741/tourism",
         componentID: 0,
         info: {
           Type: "cities"
